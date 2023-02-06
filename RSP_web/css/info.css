@@ -1,0 +1,228 @@
+.info {
+    float: right;
+    width: 684px;
+    height: 1431px;
+    position: sticky;
+    top: 143px;
+}
+
+.info .task,.hours,.mates{
+    width: auto;
+    background-color: #f1f0f0;
+    margin-bottom: 30px;
+}
+
+.info .task {
+    font-family: Arial;
+    letter-spacing: 2px;
+    padding: 45.5px;
+    height: 345px;
+    background-image: url("../images/circle.png");
+    background-size:32%;
+    background-position: 40px 40px;
+    background-repeat: no-repeat;
+}
+.task .circle {
+    margin: 3px;
+}
+.task .portaitInfo, .taskList{
+    width: 292px;
+    height: 400px;
+    /*background-color: #da7863;*/
+    float: left;
+}
+.task .portaitInfo p {
+    margin: 25px 43px;
+    font-size: 30px;
+}
+.task input {
+    letter-spacing: 2px;
+    border-radius:10px;
+    color: white;
+    background-color: black;
+    border: 0;
+    width: 200px;
+    height: 60px;
+    font-size: 25px;
+}
+.portaitInfo input {
+    margin: 10px 8px;
+}
+.taskList input {
+    background-color: gray;
+    margin: 18px 40px;
+}
+.taskList .title {
+    border-radius:25px;
+    font-size: 22px;
+    width: 150px;
+    height: 40px;
+    background-color: #022EFF;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+}
+.taskList ul{
+    padding:20px 0;
+    list-style: none;
+    margin:0;
+    font-size: 30px;
+}
+.taskList ul li {
+    margin-top: 16px;
+}
+ul .left {
+    color: #022EFF;
+}
+ul .right {
+    text-align: right;
+}
+.task .circle {
+    width: 185px;
+    height: 185px;
+    border-radius: 50%;
+    background-image:url("../images/avator.png");
+    background-size:100%;
+    border: white solid 8px;
+    background-color: white;
+}
+
+.info .hours {
+    letter-spacing: 1px;
+    height: 290px;
+    padding: 30px 40px;
+}
+#dateOfToday {
+    color: #575757;
+    font-size: 28px;
+}
+.hours .bar {
+    margin-top: 25px;
+    height: 16px;
+    width: 600px;
+    background-color: #9ba2f8;
+}
+.bar .process {
+    height: 16px;
+    width: 450px;
+    background-color: #022eff;
+}
+.hours p {
+    display: inline-block;
+}
+.hours .p2, .p30, .hour {
+    color: #022EFF;
+}
+.hours .p2 {
+    margin-left:485px
+}
+.hours .hour {
+    font-size:28px;
+}
+.hours .p24 {
+    color: #807e7e;
+}
+.hours .p24, .p30{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size:70px;
+}
+.hours input {
+
+    display: block;
+    border-radius:10px;
+    color: white;
+    background-color: black;
+    border: 0;
+    width: 200px;
+    height: 60px;
+    font-size: 25px;
+}
+.info .mates {
+    height: 520px;
+    letter-spacing: 1px;
+    padding: 30px 40px;
+    position: relative;
+
+}
+.mates .myMate {
+    font-size: 30px;
+    margin:0;
+}
+.mates .div-relative {
+    margin: 30px 30px;
+    position: relative;
+}
+.div-a>a>image,.div-b,.div-c {
+    box-shadow: 2px 2px 6px #000000;
+}
+.div-relative .div-a {
+    opacity: 50%;
+    left: 120px;
+    position: absolute;
+}
+.div-relative .div-b,.div-c{
+    width: 100px;
+    height: 100px;
+    background-size:100%;
+    border-radius: 50%;
+    position: absolute;
+}
+.div-relative .div-b {
+    left: 45px;
+    background-image:url("../images/touxiang2.jpeg");
+}
+.div-relative .div-c {
+    left: -30px;
+    border-radius: 50%;
+    background-image:url("../images/touxiang1.jpeg");
+}
+.actions {
+    margin-top: 180px;
+    color: #5b5c5d;
+}
+
+.actions p {
+    font-size: 23px;
+    display: inline;
+    margin:0;
+}
+.actions div {
+    margin:30px 0;
+}
+.promote {
+    color: darkred;
+}
+.actions .mate1 {
+    color: #022EFF;
+}
+.actions .mate2 {
+    color: blueviolet;
+}
+.actions .mate3 {
+    color: #49ce3f;
+}
+.actions .time1 {
+    letter-spacing: 0;
+    color: #b5b9fa;
+    float:right;
+}
+.cover {
+    /*background: linear-gradient(to bottom, transparent, #e8e8e8);*/
+    /*background-size:cover;*/
+    /*background: linear-gradient(to bottom, transparent, #5f6cff);*/
+    background-image: url("../images/cover.png");
+    background-size:cover;
+    bottom:0;
+    height: 350px;
+    width: 683px;
+    left: 0;
+    position: absolute;
+}
+
+.mates .more {
+    text-decoration: none;
+    position: absolute;
+    font-size:22px;
+    color: #3b3f41;
+}
