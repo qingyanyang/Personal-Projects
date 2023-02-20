@@ -1,0 +1,17 @@
+.subscribe {
+    margin-top:150px;
+
+    text-align: center;
+}
+.subscribe p{
+    font-size: 50px;
+    font-family: "Avenir Next", Sans-serif, serif;
+    letter-spacing: 4px;
+}
+.subscribe .address {
+    margin-top: 20px;
+    font-size: 30px;
+}
+.subscribe .icons {
+    width: 10%;
+}

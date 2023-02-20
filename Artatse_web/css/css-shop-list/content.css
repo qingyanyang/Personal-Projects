@@ -1,0 +1,114 @@
+.font{
+    font-size: 23px;
+    color: #020000;
+    font-family: "Avenir Next", Sans-serif, serif;
+    letter-spacing: 2px;
+}
+.content {
+    margin-top: 70px;
+    margin-bottom: 110px;
+}
+.navList {
+    padding-left: 660px;
+    height: 80px;
+    line-height: 50px;
+    box-shadow: 0 7px 10px -5px #c9c9c9;
+}
+.navList li {
+    float: left;
+    font-family:"Arial", Helvetica, sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin:0 30px;
+}
+.navList li a:hover {
+    color: #885fff;
+}
+.M {
+    width: 2245px;
+    margin:auto;
+}
+.search-content {
+    margin-top:40px;
+}
+.search-content .title {
+    font-size: 60px;
+    font-family: "Avenir Next", Sans-serif, serif;
+}
+.search-content .content-list {
+    margin-top: 40px;
+}
+.content-list ul {
+    width: 2800px;
+}
+.search-content .content-list li{
+    float: left;
+    margin-right:50px;
+    margin-bottom:50px;
+    width: 517px;
+    height: 650px;
+    border: 4px solid #ffffff;
+    background-color: #f8f8f8;
+    box-shadow: 1px 1px 10px #d0d0d0;
+    overflow: hidden;
+}
+.item0 {
+    position: relative;
+}
+.addCart {
+    /*visibility: hidden;*/
+    position: absolute;
+    top:550px;
+    left:250px;
+    height: 45px;
+    width: 170px;
+    font-size: 25px;
+    color: white;
+    border-radius: 25px;
+    border: 4px solid #ffbe31;
+    background-color: #ffbe31;
+    box-shadow: 1px 2px 6px #ffbe31;
+    z-index: 15;
+}
+.addCart:hover {
+    visibility: visible;
+}
+.content-list li img {
+    width: 100%;
+}
+.content-list li p {
+    margin-left: 30px;
+    font-weight: 500;
+    font-family: "Avenir Next", Sans-serif, serif;
+}
+.content-list .item0:hover {
+    /*position: relative;*/
+    border: 4px solid #ffbe31;
+    /*height: 750px;*/
+    z-index: 1000;
+}
+.content-list li .describe {
+    margin-top: 30px;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+.content-list li .price {
+    margin-top: 20px;
+    font-size: 40px;
+    color: #463285;
+    letter-spacing: -1px;
+}
+.search-content .next {
+    margin-top:60px;
+    margin-left: 970px;
+}
+.next li{
+    float: left;
+    margin-right: 20px;
+    font-size:32px;
+    font-weight: 550;
+    font-family: "Avenir Next", Sans-serif, serif;
+}
+.next li a {
+    color: #463285;
+}

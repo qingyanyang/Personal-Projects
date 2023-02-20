@@ -1,0 +1,56 @@
+.footer {
+    margin-top: 40px;
+    height: 700px;
+    border: .5px solid #bbbdbe;
+}
+.footer .frame{
+    padding-top: 100px;
+}
+.footer .text {
+    float: left;
+    width:800px;
+}
+.footer .text img {
+    margin-bottom: 50px;
+    width: 50%;
+}
+
+.footer .text p {
+    font-size: 28px;
+}
+.service_info {
+    float: left;
+    margin-left:300px;
+    font-size: 28px;
+    font-family: "Avenir Next", Sans-serif, serif;
+    letter-spacing: 4px;
+}
+.service_info p {
+    margin-bottom: 45px;
+    font-size: 40px;
+    font-weight: 500;
+}
+.service_info ul li {
+    margin-bottom: 25px;
+}
+.service_info li a {
+    text-decoration: none;
+    color: black;
+}
+.service_info a:hover {
+    color: #885fff;
+}
+.service_info .service, .info, .security {
+    float: left;
+    margin-right: 150px;
+}
+.copyright {
+    height: 100px;
+}
+.copyright p {
+    text-align: center;
+    line-height: 100px;
+    font-size: 25px;
+    font-family: "Avenir Next", Sans-serif, serif;
+    color: #8c8b8b;
+}

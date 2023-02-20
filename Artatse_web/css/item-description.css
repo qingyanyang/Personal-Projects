@@ -1,0 +1,64 @@
+.item-des {
+    margin-top: 70px;
+}
+.item-des .item-pics,.description {
+    float: left;
+    width: 1082px;
+}
+.item-des .item-pics .big {
+    width: 100%;
+}
+.item-des .item-pics .big img {
+    width: 90%;
+}
+.item-des .item-pics .small {
+    width: auto;
+}
+.item-des .item-pics .small li {
+    float:left;
+    height: 220px;
+    width: 250px;
+    background-color: #ff0000;
+}
+.item-des .item-pics .small li img {
+    height: 100%;
+    width: 100%;
+}
+.item-des .description {
+    padding-left:80px;
+}
+.item-des .description p {
+    font-family: "Avenir Next", Sans-serif, serif;
+}
+.item-des .description .title {
+    font-size: 60px;
+    letter-spacing: 1px;
+}
+.item-des .description .price {
+    margin-top: 60px;
+    font-size: 40px;
+    font-weight: 500;
+    color: #463285;
+}
+.item-des .description .pay-way {
+    font-size: 30px;
+}
+.item-des .description input {
+    display: block;
+}
+.item-des .description .button-cart {
+    margin-top:180px;
+    width: 500px;
+    height: 100px;
+    background-color: #ffbe31;
+    font-size: 35px;
+    color: #ffffff;
+    border: none;
+}
+.item-des .description .script1,.script2 {
+    font-size: 30px;
+    color: #646464;
+}
+.item-des .description .script1 {
+    font-weight: 550;
+}
