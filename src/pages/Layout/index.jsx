@@ -1,54 +1,68 @@
-import { FileOutlined, PieChartOutlined, UserOutlined, DesktopOutlined, TeamOutlined } from '@ant-design/icons';
+import { CaretRightOutlined,AppstoreAddOutlined, MoneyCollectOutlined, UnorderedListOutlined, UserOutlined, MenuUnfoldOutlined, TeamOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { useState } from 'react';
-
+import { useState,useEffect } from 'react';
+import { useNavigate,Outlet,NavLink } from 'react-router-dom';
+import storageUtils from '../../utils/storageUtils';
+//import menuList from '../../config/menuConfig'
+import HeaderContent from '../../components/HeaderContent'
+import './index.css'
 const { Header, Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, children) {
+let keyValue = '';
+
+function getItem(label, key, icon, children, onClick) {
   return {
     key,
     icon,
     children,
     label,
+    onClick,
   };
 }
 
 const menuItems = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('sub1', 'User', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
+  getItem('订单', '1', <NavLink to="order"> <UnorderedListOutlined /> </NavLink> ),
+  getItem('菜单', 'sub1',  <MenuUnfoldOutlined />,[
+    getItem('列表', '2', <NavLink to="menu_list"><CaretRightOutlined /></NavLink>),
+    getItem('分类', '3', <NavLink to="menu_category"><CaretRightOutlined /></NavLink >),
+    getItem('库存警报', '4', <NavLink to="menu_warning"><CaretRightOutlined /></NavLink >),
   ]),
-  getItem('sub2', 'Team', <TeamOutlined />, [
-    getItem('Team 1', '6'),
-    getItem('Team 2', '8'),
+  getItem('库存', 'sub2', <AppstoreAddOutlined />, [
+    getItem('列表', '5', <NavLink to="storage_list"><CaretRightOutlined /></NavLink >),
+    getItem('分类', '6', <NavLink to="storage_category"><CaretRightOutlined /></NavLink >),
+    getItem('库存警报', '7', <NavLink to="storage_warning"><CaretRightOutlined /></NavLink >),
   ]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('人员', 'sub3', <TeamOutlined />, [
+    getItem('列表', '8', <NavLink to="employees_list"><CaretRightOutlined /></NavLink >),
+    getItem('排班', '9', <NavLink to="employees_rooster"><CaretRightOutlined /></NavLink >),
+  ]),
+  getItem('用户', '10', <NavLink to="users"><UserOutlined /></NavLink >),
+  getItem('财务', '11', <NavLink to="finance"><MoneyCollectOutlined /></NavLink >),
 ];
 
 export default function LayoutPage() {
+  const navigate = useNavigate()
+  useEffect(()=>{
+    const user = storageUtils.getUser()
+    //alert(user)
+    if (typeof user === 'object') {
+      navigate('/', { replace: true })
+    }
+  },[])
+  
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const handleMenuClick = (key)=>{
+    keyValue=key
+  }
   return (
-    <Layout
-      style={{
-        minHeight: '100vh',
-      }}
-    >
+    <Layout style={{minHeight: '100vh'}}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div
-          style={{
-            height: 32,
-            margin: 16,
-            background: 'rgba(255, 255, 255, 0.2)',
-          }}
-        />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menuItems} />
+        <div className='title'>Miyabi后台管理</div>
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menuItems} onClick={(e) => handleMenuClick(e.key)} />
       </Sider>
       <Layout className="site-layout">
         <Header
@@ -56,17 +70,11 @@ export default function LayoutPage() {
             padding: 0,
             background: colorBgContainer,
           }}
-        />
-        <Content
-          style={{
-            margin: '0 16px',
-          }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
+          <HeaderContent/>
+        </Header>
+        <Content style={{margin: '0 16px',}}>
+          <Breadcrumb style={{margin: '16px 0',}}>
             <Breadcrumb.Item key="sub1">User</Breadcrumb.Item>
             <Breadcrumb.Item key="4">Bill</Breadcrumb.Item>
           </Breadcrumb>
@@ -77,7 +85,7 @@ export default function LayoutPage() {
               background: colorBgContainer,
             }}
           >
-            Bill is a cat.
+            <Outlet/>
           </div>
         </Content>
         <Footer />

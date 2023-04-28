@@ -1,16 +1,13 @@
-// import { ConfigProvider } from 'antd';
-import {Routes,Route} from 'react-router-dom'
-import Login from './pages/Login'
-import Layout from './pages/Layout'
+
+import {useRoutes} from 'react-router-dom'
 import "./index.css"
+import routes from "./routes"
 
 function App() {
+  const element = useRoutes(routes)
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element={<Layout/>}></Route>
-        <Route path='/layout/:user' element={<Login />}></Route>
-      </Routes>
+      {element}
     </div>
   );
 }

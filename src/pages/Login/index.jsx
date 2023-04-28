@@ -1,30 +1,53 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {reqLogin} from '../../api'
+import { useEffect } from 'react';
+import { reqLogin } from '../../api'
+import storageUtils from '../../utils/storageUtils'
+import memoryUtils from '../../utils/memoryUtils'
 import './index.css'
+
 export default function Login() {
-  const navigate = useNavigate()
+ 
+  const navigate = useNavigate();
+  //if user has been loged in goto layout
+  useEffect(()=>{
+    const user = storageUtils.getUser()
+    const type = typeof (user)
+    if (type === 'string') {
+      navigate('/layout', { replace: true })
+    }
+  },[])
+  
   const onFinish = async(values) => {
     // console.log('Received values of form: ', values);
-      const response = await reqLogin(values.username,values.password)
-      const res = response.data
-    if (res.status===0){
-        message.success('log in successful')
-      navigate(`layout/${res.data}`,{
-        replace:false,
-      })
-      }else{
-      message.error(res.msg)
-      }
+    console.log(values)
+    const {username,password} = values
+    //get response
+    const response = await reqLogin(username, password)
+    console.log("成功",response.data) //{status:0,data:user} {status:1,msg:'xxx'}
+
+    const result = response.data
+    
+    if(result.status==='0'){
+      message.success('welcome~ ' + result.data)
+      //save user
+      const user = result.data
+      memoryUtils.user = user
+      storageUtils.saveUser(user)
+      //transfer params
+      navigate('/layout', { replace: true })
+    }else{
+      message.error(result.msg)
+    }
   };
 
   return (
     <div className="login">
       <div className="loginHeader">
       </div>
-      <section className="loginContent">
-        <p>Management System</p>
+      <div className="loginContent">
+        <p>welcome to Miyabi!</p>
         <Form
           name="normal_login"
           className="login-form"
@@ -74,7 +97,7 @@ export default function Login() {
             </Button>
           </Form.Item>
         </Form>
-      </section>
+      </div>
     </div>
   )
 }
