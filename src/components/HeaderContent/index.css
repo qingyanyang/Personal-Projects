@@ -1,0 +1,20 @@
+.header{
+    height: 64px;
+    width: auto;
+}
+.header-top, .header-bottom{
+    margin-right: 16px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 32px;
+    width: auto;
+    font-size: 12px;
+}
+.wel {
+    margin-right: 10px;
+}
+img {
+    margin: 5px 5px;
+    height: 50%;
+}

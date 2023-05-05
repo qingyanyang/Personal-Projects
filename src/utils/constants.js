@@ -1,0 +1,1 @@
+export const PAGE_SIZE=3 //每页显示条数

@@ -1,0 +1,9 @@
+.linkBtn {
+    padding: 0;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color:rgb(22, 114, 250);
+    background-color: transparent;
+    cursor:pointer;
+}

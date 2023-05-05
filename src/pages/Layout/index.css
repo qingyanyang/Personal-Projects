@@ -8,3 +8,6 @@
     height: 32px;
     color: white;
 }
+.ant-breadcrumb-separator {
+    visibility: hidden;
+}

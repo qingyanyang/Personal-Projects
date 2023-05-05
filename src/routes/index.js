@@ -2,8 +2,11 @@ import Layout from "../pages/Layout"
 import Login from "../pages/Login"
 import Order from "../pages/Order"
 import Menus from "../pages/Menus"
-import MenuCategory from "../pages/MenuCategory"
 import MenuList from "../pages/MenuList"
+import MenuListHome from '../pages/MenuList/MenuListHome'
+import MenuListDetail from "../pages/MenuList/MenuListDetail"
+import MenuListAddUpdate from "../pages/MenuList/MenuListAddUpdate"
+import MenuCategory from "../pages/MenuCategory"
 import MenuWarning from "../pages/MenuWarning"
 import Storage from "../pages/Storage"
 import StorageCategory from "../pages/StorageCategory"
@@ -26,12 +29,38 @@ export default[
         element: <Layout/>,
         children:[
             {
+                index: true,
+                element: <Navigate to="/layout/order" replace />,
+            },
+            {
                 path: 'order',
                 element: <Order />,
             },
             {
                 path: 'menu_list',
-                element: <MenuList />
+                element: <MenuList />,
+                children:[
+                    {
+                        index: true,
+                        element: <Navigate to="/layout/menu_list/home" replace />,
+                    },
+                    {
+                        path: 'home',
+                        element: <MenuListHome />
+                    },
+                    {
+                        path:'detail',
+                        element: <MenuListDetail/>
+                    },
+                    {
+                        path: 'add_update',
+                        element: <MenuListAddUpdate />
+                    },
+                    {
+                        path: "*",
+                        element: <Navigate to="/layout/menu_list" replace />,
+                    }
+                ]
             },
             {
                 path: 'menu_category',
@@ -68,6 +97,10 @@ export default[
             {
                 path: 'finance',
                 element: <Finance />
+            },
+            {
+                path: "*",
+                element: <Navigate to="/layout" replace />,
             }
         ]
     },
