@@ -1,9 +1,9 @@
 import React from 'react'
 import './index.css'
 
-export default function index(props) {
-    const{children}=props
+export default function LinkButton(props) {
+  const { children }=props
   return (
-      <button className='linkBtn'{...props}>{children}</button>
+    <button className='linkBtn'{...props}>{children}</button>
   )
 }

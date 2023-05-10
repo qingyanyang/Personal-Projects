@@ -115,7 +115,7 @@ export default function Index() {
     //onCancel method
     const handleCancel = () => {
         // formValue.form.resetFields()
-        
+        console.log()
         setModalshow('0');
         
         formValue.form.resetFields()
@@ -147,6 +147,7 @@ export default function Index() {
         //异步的,所以要加回调保证先更新state再发送请求
         setParentId(category._id)
         setParentName(category.name)
+        console.log('showSubCategorys:',parentId)
     }
 
     const showCategorys = () => {

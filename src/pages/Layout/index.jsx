@@ -6,73 +6,60 @@ import menuList from '../../config/menuConfig';
 import HeaderContent from '../../components/HeaderContent';
 import './index.css';
 
+
 const { Header, Content, Footer, Sider } = Layout;
 
-
-// function getItem(label, key, icon, children, onClick) {
-//   return {
-//     key,
-//     icon,
-//     children,
-//     label,
-//     onClick,
-//   };
-// }
-
-
-// const menuItems = [
-//   getItem('订单', '1', <NavLink to="order"> <UnorderedListOutlined /> </NavLink> ),
-//   getItem('菜单', 'sub1',  <MenuUnfoldOutlined />,[
-//     getItem('列表', '2', <NavLink to="menu_list"><CaretRightOutlined /></NavLink>),
-//     getItem('分类', '3', <NavLink to="menu_category"><CaretRightOutlined /></NavLink >),
-//     getItem('库存警报', '4', <NavLink to="menu_warning"><CaretRightOutlined /></NavLink >),
-//   ]),
-//   getItem('库存', 'sub2', <AppstoreAddOutlined />, [
-//     getItem('列表', '5', <NavLink to="storage_list"><CaretRightOutlined /></NavLink >),
-//     getItem('分类', '6', <NavLink to="storage_category"><CaretRightOutlined /></NavLink >),
-//     getItem('库存警报', '7', <NavLink to="storage_warning"><CaretRightOutlined /></NavLink >),
-//   ]),
-//   getItem('人员', 'sub3', <TeamOutlined />, [
-//     getItem('列表', '8', <NavLink to="employees_list"><CaretRightOutlined /></NavLink >),
-//     getItem('排班', '9', <NavLink to="employees_rooster"><CaretRightOutlined /></NavLink >),
-//   ]),
-//   getItem('用户', '10', <NavLink to="users"><UserOutlined /></NavLink >),
-//   getItem('财务', '11', <NavLink to="finance"><MoneyCollectOutlined /></NavLink >),
-// ];
-
-const menuItems = menuList
 export default function LayoutPage(props) {
-
   const navigate = useNavigate()
+  const user = storageUtils.getUser()
+  const { role } = user
+  //function to
+  const filterMenuList = (menuList, role)=> {
+    const filteredMenuList = menuList.filter(menuItem => {
+      // Check if the current menu item is in the role array
+      const isMenuItemAllowed = role.includes(menuItem.key);
 
+      // If the menu item has children, filter them based on the role array
+      if (menuItem.children) {
+        menuItem.children = menuItem.children.filter(child => role.includes(child.key));
+      }
+
+      return isMenuItemAllowed || (menuItem.children && menuItem.children.length > 0);
+    });
+
+    return filteredMenuList;
+  }
+  const menuItems = filterMenuList(menuList, role)
+  console.log('menuItem ',menuItems)
   useEffect(()=>{
-    const user = storageUtils.getUser()
-    if (typeof user === 'object') {
+    console.log(user)
+    if (!user || Object.keys(user).length===0) {
       navigate('/', { replace: true })
     }
-  }, [navigate])
+  }, [storageUtils.getUser()])
 
   const location = useLocation();
 
   const getTitle=()=> {
     const { pathname } = location;
+    //console.log('path:',pathname)
     let names = pathname.split('/')
 
     console.log(names)
     let titles = []
     menuList.forEach(item=>{
 
-      if (item.key === names[2]){
+      if (item.key.substring(1) === names[2]){
         titles[0] = item.label
       } else if (item.children) {
-        const cItem = item.children.find(cItem => cItem.key === names[2])
+        const cItem = item.children.find(cItem => cItem.key.substring(1) === names[2])
         if (cItem) {
           titles[0] = item.label
           titles[1] = cItem.label
         }
       }
     })
-    console.log(titles)
+    console.log('title:',titles)
     return titles
   }
   
@@ -97,9 +84,10 @@ export default function LayoutPage(props) {
           <HeaderContent/>
         </Header>
         <Content style={{margin: '0 16px',}}>
-          <Breadcrumb style={{margin: '16px 0',}}>
-            <Breadcrumb.Item key="sub1" style={{ color: getTitle()[1] ? 'grey':'black'}}>{getTitle()[0]}</Breadcrumb.Item>
-            {getTitle()[1] ? <h1 style={{ marginLeft: '-14px', marginRight: '4px' }}>/</h1>:null}
+          
+          <Breadcrumb style={{ margin: '8px 0' }}>
+            <Breadcrumb.Item key="sub1" >{getTitle()[0]}</Breadcrumb.Item>
+            {getTitle()[1] ? <h1 style={{ marginLeft: '-14px', marginRight: '4px' }}>/</h1> : null}
             <Breadcrumb.Item key="4">{getTitle()[1]}</Breadcrumb.Item>    
           </Breadcrumb>
           <div

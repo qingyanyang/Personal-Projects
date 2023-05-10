@@ -11,13 +11,13 @@ export default function Login() {
  
   const navigate = useNavigate();
   //if user has been loged in goto layout
+  const user = storageUtils.getUser()
   useEffect(()=>{
-    const user = storageUtils.getUser()
-    const type = typeof (user)
-    if (type === 'string') {
+    
+    if (user && Object.keys(user).length > 0) {
       navigate('/layout', { replace: true })
     }
-  },[])
+  }, [storageUtils.getUser()])
   
   const onFinish = async(values) => {
     // console.log('Received values of form: ', values);
@@ -29,8 +29,8 @@ export default function Login() {
 
     const result = response.data
     
-    if(result.status==='0'){
-      message.success('welcome~ ' + result.data)
+    if(result.status=== 0){
+      message.success('welcome~ ' + result.data.username)
       //save user
       const user = result.data
       memoryUtils.user = user

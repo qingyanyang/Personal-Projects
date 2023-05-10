@@ -1,6 +1,8 @@
 import Layout from "../pages/Layout"
 import Login from "../pages/Login"
 import Order from "../pages/Order"
+import OrderListHome from "../pages/Order/OrderListHome"
+import OrderListRank from "../pages/Order/OrderListRank"
 import Menus from "../pages/Menus"
 import MenuList from "../pages/MenuList"
 import MenuListHome from '../pages/MenuList/MenuListHome'
@@ -15,7 +17,7 @@ import StorageWarning from "../pages/StorageWarning"
 import Employees from "../pages/Employees"
 import EmployeesList from "../pages/EmployeesList"
 import EmployeesRooster from "../pages/EmployeesRooster"
-import Users from "../pages/Users"
+import EmployeesRole from "../pages/EmployeesRole"
 import Finance from "../pages/Finance"
 import { Navigate } from "react-router-dom"
 
@@ -35,6 +37,24 @@ export default[
             {
                 path: 'order',
                 element: <Order />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/layout/order/home" replace />,
+                    },
+                    {
+                        path: 'home',
+                        element: <OrderListHome />
+                    },
+                    {
+                        path: 'sale_rank',
+                        element: <OrderListRank />
+                    },
+                    {
+                        path: "*",
+                        element: <Navigate to="/layout/order" replace />,
+                    }
+                ]
             },
             {
                 path: 'menu_list',
@@ -91,8 +111,8 @@ export default[
                 element: <EmployeesRooster />
             }, 
             {
-                path: 'users',
-                element: <Users/>
+                path: 'employees_role',
+                element: <EmployeesRole />
             },
             {
                 path: 'finance',

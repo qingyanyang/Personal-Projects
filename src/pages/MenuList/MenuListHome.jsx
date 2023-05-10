@@ -1,13 +1,12 @@
 import React, {useEffect, useState}from 'react'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import { Card, Table, Button, Select, message, Modal, Input } from 'antd'
+import { useNavigate, Outlet} from 'react-router-dom';
+import { Card, Table, Button, Select, message, Input } from 'antd'
 import LinkButton from '../../components/LinkButton'
-import { reqItems } from '../../api'
-import { reqSearchItems } from '../../api';
+import { reqItems, reqSearchItems, reqUpdateItemsStatus } from '../../api'
 import {PAGE_SIZE} from '../../utils/constants'
 
-
+let pageNumGlobal = 1
 export default function MenuListHome() {
     const [columns,setColumns]=useState([])
     const [itemList,setItemList] = useState([])
@@ -16,8 +15,9 @@ export default function MenuListHome() {
     const [searchType, setSearchType] = useState('name')
     const [searchName, setSearchName] = useState('')
     const [forSearch, setForSearch]=useState(false)
-    const [pageNum,setPageNum]=useState(1)
+    const [pageNum, setPageNum] = useState(pageNumGlobal)
 
+    console.log(pageNum)
     const navigate = useNavigate()
     
     const initColumns = () => {
@@ -42,12 +42,19 @@ export default function MenuListHome() {
             {
                 title: '状态',
                 align: 'center',
-                dataIndex: 'status',
-                render:(status)=>{
+                //dataIndex: 'status',
+                render:(item)=>{
+                    const {_id,status} = item
                     return(
                         <div>
-                            <Button type='primary'>下架</Button>
-                            <span style={{textAlign:'left'}}>onsale</span>
+                            <Button 
+                                type='primary' 
+                                onClick={() => { updateItemsStatus(_id, status===1?0:1)}}
+                                style={{ backgroundColor: (status === 1 ? 'gray' : '#1890ff') }}
+                                >
+                                {status ===1?'下架':'上架'}
+                            </Button>
+                            <span style={{ textAlign: 'left', color:(status === 1?'black':'red')}}>{status === 1 ? 'onSale':'soldOut'}</span>
                         </div>
                     )
                 }
@@ -68,20 +75,30 @@ export default function MenuListHome() {
         ])
     }
     
+    const updateItemsStatus= async (_id, status)=>{
+        const res = await reqUpdateItemsStatus(_id, status)
+        const data = res.data
+        console.log(pageNum)
+        if (data.status===0){
+            message.success('successful!')
+            getItems(pageNumGlobal)
+        }
+    }
     const showAddCategory = () => {
         console.log('to addupdate page')
         navigate('/layout/menu_list/add_update/', { replace: true })
     }
     const showUpdateDetail=(category)=>{
         console.log('to addupdate page')
-        navigate('/layout/menu_list/add_update/', { replace: true })
+        navigate('/layout/menu_list/add_update/', { replace: true, state: { category}})
     }
     const showDetail=(category)=>{
         console.log('to addupdate page')
-        navigate('/layout/menu_list/detail/', { replace: true })
+        navigate('/layout/menu_list/detail/', { replace: true, state: { category } })
     }
     //发送异步请求
     const getItems = async (pageNumber)=>{
+        pageNumGlobal = pageNumber
         setLoading(true)
         let result = {}
         if (!forSearch){
@@ -172,7 +189,7 @@ export default function MenuListHome() {
                     total:total, 
                     defaultPageSize: PAGE_SIZE, 
                     showQuickJumper: true,
-                    onChange:page=>setPageNum(page) //这里传入了page number
+                    onChange: page => setPageNum(page)//这里传入了page number
                      }} />
             <Outlet />
         </Card>

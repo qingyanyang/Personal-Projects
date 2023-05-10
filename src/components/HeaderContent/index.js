@@ -38,7 +38,7 @@ export default function Index() {
   return (
     <div className='header'>
       <div className='header-top'>
-        <span className='wel'>欢迎, {storageUtils.getUser()} </span>
+        <span className='wel'>欢迎, {storageUtils.getUser().username} </span>
         <LinkButton onClick={logOut}>退出</LinkButton>
       </div>
       <div className='header-bottom'>
