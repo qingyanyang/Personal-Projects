@@ -13,6 +13,9 @@ import MenuWarning from "../pages/MenuWarning"
 import Storage from "../pages/Storage"
 import StorageCategory from "../pages/StorageCategory"
 import StorageList from "../pages/StorageList"
+import StorageListHome from '../pages/StorageList/StorageListHome'
+import StorageListDetail from '../pages/StorageList/StorageListDetail'
+import StorageListAddUpdate from '../pages/StorageList/StorageListAddUpdate'
 import StorageWarning from "../pages/StorageWarning"
 import Employees from "../pages/Employees"
 import EmployeesList from "../pages/EmployeesList"
@@ -92,7 +95,29 @@ export default[
             },
             {
                 path: 'storage_list',
-                element: <StorageList />
+                element: <StorageList />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/layout/storage_list/home" replace />,
+                    },
+                    {
+                        path: 'home',
+                        element: <StorageListHome />
+                    },
+                    {
+                        path: 'detail',
+                        element: <StorageListDetail />
+                    },
+                    {
+                        path: 'add_update',
+                        element: <StorageListAddUpdate />
+                    },
+                    {
+                        path: "*",
+                        element: <Navigate to="/layout/storage_list" replace />,
+                    }
+                ]
             },
             {
                 path: 'storage_category',

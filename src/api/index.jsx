@@ -9,7 +9,6 @@ export const reqAddCategory = (categoryName, parentId) => ajax('/manage/category
 export const reqUpdateCategory = (categoryId, categoryName) => ajax('/manage/category/update', { categoryId, categoryName }, "POST")
 //删除分类
 export const reqDeleteCategory = (categoryId) => ajax('/manage/category/delete', { categoryId }, "POST")
-
 //获取商品列表
 export const reqItems = (pageNumber, pageSize) => ajax('/manage/item/list', { pageNumber, pageSize })
 //搜索商品分页列表
@@ -45,7 +44,6 @@ export const reqAddEmployee = (employee) => ajax('/manage/employee/add', { emplo
 export const reqUpdateEmployee = (employeeId, employee) => ajax('/manage/employee/update', { employeeId,employee }, "POST")
 //delete employee
 export const reqDeleteEmployee = (employeeId) => ajax('/manage/employee/delete', { employeeId }, "POST")
-
 //获取order分页列表
 export const reqOrders = (pageNumber, pageSize) => ajax('/manage/order/list', { pageNumber, pageSize })
 //搜索order分页列表
@@ -54,4 +52,23 @@ export const reqSearchOrders = ({ pageNumber, pageSize, orderId }) => ajax('/man
 export const reqDeleteOrder = (orderId) => ajax('/manage/order/delete', { orderId }, "POST")
 //get sale ranks
 export const reqOrdersRank = () => ajax('/manage/order/list_rank')
-
+//获取StorageCategory的列表
+export const reqStorageCategory = () => ajax('/manage/storage/category_list')
+//添加StorageCategory
+export const reqAddStorageCategory = (storageCategory) => ajax('/manage/storage/category_add', { storageCategory }, "POST")
+//修改StorageCategory
+export const reqUpdateStorageCategory = (storageCategoryId, storageCategory) => ajax('/manage/storage/category_update', { storageCategoryId, storageCategory }, "POST")
+//删除StorageCategory
+export const reqDeleteStorageCategory = (storageCategoryId) => ajax('/manage/storage/category_delete', { storageCategoryId }, "POST")
+export const reqStorageItems = (pageNumber, pageSize) => ajax('/manage/storage/item_list', { pageNumber, pageSize })
+//添加StorageCategory
+export const reqAddOrUpdateStorageItem = (storageItem) => ajax(`/manage/storage/${storageItem._id?'item_update':'item_add'}`, { storageItem }, "POST")
+//删除StorageCategory
+export const reqDeleteStorageItem = (storageItemId) => ajax('/manage/storage/item_delete', { storageItemId }, "POST")
+//搜索商品分页列表
+export const reqSearchStorageItems = ({ pageNumber, pageSize, searchName, searchType }) => ajax('/manage/storage/item_search', {
+    pageNumber,
+    pageSize,
+    [searchType]: searchName
+    //[]是动态变化的,如果它的值是searchbyname,那么就变成searchbyname:searchName;如果它的值是searchbydesc,那么就变成searchbydesc:searchName
+})

@@ -16,7 +16,6 @@ export default function Index() {
     const [roles, setRoles] = useState([])
     const [showModal, setModalshow] = useState('0')//0: all close 1:1 
     const [form, setForm] = useState({})
-    const [formValue, setFormValue] = useState({})
     const [employeeSelected, setEmployeeSelected] = useState({})
     //初始化
     const initColumns = () => {
@@ -132,8 +131,8 @@ export default function Index() {
     const handleCancel = () => {
         setModalshow('0')
         form.resetFields()
-        setFormValue({})
     }
+
     const getForm = (form) => {
         setForm(form);
     };

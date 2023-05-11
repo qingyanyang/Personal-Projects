@@ -1,9 +1,10 @@
+import { Outlet } from 'react-router-dom';
 import React from 'react'
 
-export default function index() {
+export default function Index() {
     return (
         <div>
-            storagelist
+            <Outlet />
         </div>
     )
 }

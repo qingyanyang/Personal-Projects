@@ -28,7 +28,7 @@ export default function AddRoleForm(props) {
         <Input
           onChange={handleInputChange}
           maxLength={20}
-          style={{ margin: '20px 0' }}
+          style={{ margin: '20px 0', width:'470px' }}
           placeholder={roleSelect ? roleSelect.name:'请输入角色名称'}
         />
       </Form.Item>
