@@ -1,7 +1,7 @@
 import React, {useEffect, useState}from 'react'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { useNavigate, Outlet} from 'react-router-dom';
-import { Card, Table, Button, Select, message, Input } from 'antd'
+import { Card, Table, Button, Select, message, Input, Tooltip } from 'antd'
 import LinkButton from '../../components/LinkButton'
 import { reqItems, reqSearchItems, reqUpdateItemsStatus } from '../../api'
 import {PAGE_SIZE} from '../../utils/constants'
@@ -29,8 +29,19 @@ export default function MenuListHome() {
             },
             {
                 title: '商品描述',
-                width: '50%',
+                width: '40%',
                 dataIndex: 'desc',
+                render:(desc)=>(
+                    <Tooltip
+                        title={desc}
+                        color='white'
+                        overlayInnerStyle={{ color: 'black' }}
+                    >
+                        <div style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '350px' }}>
+                            {desc}
+                        </div>
+                    </Tooltip>
+                )
             },
             {
                 title: '价格',
@@ -54,7 +65,7 @@ export default function MenuListHome() {
                                 >
                                 {status ===1?'下架':'上架'}
                             </Button>
-                            <span style={{ textAlign: 'left', color:(status === 1?'black':'red')}}>{status === 1 ? 'onSale':'soldOut'}</span>
+                            <div style={{ textAlign: 'center', color:(status === 1?'green':'red')}}>{status === 1 ? 'onSale':'soldOut'}</div>
                         </div>
                     )
                 }
@@ -80,7 +91,7 @@ export default function MenuListHome() {
         const data = res.data
         console.log(pageNum)
         if (data.status===0){
-            message.success('successful!')
+            message.success('operation successfully!')
             getItems(pageNumGlobal)
         }
     }

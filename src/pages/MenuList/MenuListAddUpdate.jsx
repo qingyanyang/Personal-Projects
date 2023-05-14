@@ -13,7 +13,7 @@ import { LeftOutlined } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RichTextEditor from './RichTextEditor';
 import PicturesWall from './PicturesWall';
-import './index.css'
+import './MenuList.css'
 import {reqCategorys} from '../../api'
 import { reqAddOrUpdateItem } from '../../api'
 

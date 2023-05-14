@@ -3,7 +3,8 @@
     width: auto;
 }
 .header-top, .header-bottom{
-    margin-right: 16px;
+    position: relative;
+    margin-right: 1%;
     display: flex;
     justify-content: right;
     align-items: center;
@@ -12,9 +13,6 @@
     font-size: 12px;
 }
 .wel {
-    margin-right: 10px;
+    margin-right: 1%;
 }
-img {
-    margin: 5px 5px;
-    height: 50%;
-}
+

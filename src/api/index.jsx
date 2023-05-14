@@ -29,15 +29,17 @@ export const reqAddOrUpdateItem = (item) => ajax(`/manage/item/${item._id ? 'upd
 //获取role分类的列表
 export const reqRoles = () => ajax('/manage/role/list')
 //添加role
-export const reqAddRole = (name,time) => ajax('/manage/role/add', { name,time }, "POST")
+export const reqAddRole = (name, rate, time) => ajax('/manage/role/add', { name, rate, time }, "POST")
 //修改role name
-export const reqUpdateRoleName = (roleId, name) => ajax('/manage/role/update', { roleId, name }, "POST")
+export const reqUpdateRoleName = (roleId, rate, name) => ajax('/manage/role/update', { roleId, rate, name }, "POST")
 //删除role
 export const reqDeleteRole = (roleId) => ajax('/manage/role/delete', { roleId}, "POST")
 //修改role auth
 export const reqUpdateRoleAuth = (roleId, menus, time) => ajax('/manage/role/update_auth', { roleId, menus, time }, "POST")
 //获取employee分类的列表
 export const reqEmployees = () => ajax('/manage/employee/list')
+//employee search
+export const reqEmployeesSearch = (searchType, searchName) => ajax('/manage/employee/list_search', { [searchType]: searchName })
 //添加employee
 export const reqAddEmployee = (employee) => ajax('/manage/employee/add', { employee }, "POST")
 //update employee
@@ -47,11 +49,15 @@ export const reqDeleteEmployee = (employeeId) => ajax('/manage/employee/delete',
 //获取order分页列表
 export const reqOrders = (pageNumber, pageSize) => ajax('/manage/order/list', { pageNumber, pageSize })
 //搜索order分页列表
-export const reqSearchOrders = ({ pageNumber, pageSize, orderId }) => ajax('/manage/order/search', { pageNumber, pageSize, orderId })
+export const reqSearchOrders = ({ pageNumber, pageSize, searchName, searchType }) => ajax('/manage/order/search', { 
+    pageNumber,
+    pageSize,
+    [searchType]: searchName
+})
 //删除分类
 export const reqDeleteOrder = (orderId) => ajax('/manage/order/delete', { orderId }, "POST")
 //get sale ranks
-export const reqOrdersRank = () => ajax('/manage/order/list_rank')
+export const reqOrdersRank = (start,end) => ajax('/manage/order/list_rank',{start,end})
 //获取StorageCategory的列表
 export const reqStorageCategory = () => ajax('/manage/storage/category_list')
 //添加StorageCategory
@@ -72,3 +78,16 @@ export const reqSearchStorageItems = ({ pageNumber, pageSize, searchName, search
     [searchType]: searchName
     //[]是动态变化的,如果它的值是searchbyname,那么就变成searchbyname:searchName;如果它的值是searchbydesc,那么就变成searchbydesc:searchName
 })
+//update storage
+export const reqUpdateStorageItemStorage = (storageItemId, amount) => ajax('/manage/storage/item_storage_update', { storageItemId, amount }, "POST")
+export const reqStorageItemsSort = (pageNumber, pageSize, isAsend) => ajax('/manage/storage/item_list_sort', { pageNumber, pageSize, isAsend })
+//获取record的列表
+export const reqEmployeesRecords = (searchType, searchName, start, end) => ajax('/manage/employee/record_list', { [searchType]: searchName, start, end })//删除StorageCategory
+//delete record
+export const reqDeleteEmployeesRecord = (recordId) => ajax('/manage/employee/record_delete', { recordId }, "POST")
+//add record
+export const reqOperationRecordAdd = (operation, username, time, amount, field) => ajax('/manage/storage/operation_add', { operation, username, time, amount, field }, "POST")
+//record list
+export const reqOperationRecord = (start, end) => ajax('/manage/storage/operation_record', { start, end })
+//record delete
+export const reqOperationRecordDelete = (recordId) => ajax('/manage/storage/operation_record_delete', { recordId },"POST")

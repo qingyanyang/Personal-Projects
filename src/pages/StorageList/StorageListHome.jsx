@@ -1,14 +1,18 @@
 import React, {useEffect, useState}from 'react'
-import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
+import { PlusOutlined, SearchOutlined, ArrowUpOutlined,ArrowDownOutlined} from '@ant-design/icons'
 import { useNavigate, Outlet} from 'react-router-dom';
-import { Card, Table, Button, Select, message, Input,Row,Col } from 'antd'
+import { Card, Table, Button, Select, message, Input, Row, Col, Modal, InputNumber ,Form} from 'antd'
 import LinkButton from '../../components/LinkButton'
-import { reqStorageItems, reqStorageCategory, reqSearchStorageItems } from '../../api'
+import { reqStorageItems, reqStorageCategory, reqSearchStorageItems, reqUpdateStorageItemStorage, reqStorageItemsSort, reqOperationRecordAdd} from '../../api'
 import {PAGE_SIZE} from '../../utils/constants'
-import { formateDate } from '../../utils/dateUtils'
+import { convertDate, convertTime } from '../../utils/dateUtils'
+import './StorageList.css'
+import storageUtils from '../../utils/storageUtils'
 
+let amountFinal = 0
 let pageNumGlobal = 1
 export default function StorageListHome() {
+    const [form] = Form.useForm();
     const [columns,setColumns]=useState([])
     const [itemList,setItemList] = useState([])
     const [total,setTotal]=useState([])
@@ -18,6 +22,12 @@ export default function StorageListHome() {
     const [forSearch, setForSearch]=useState(false)
     const [pageNum, setPageNum] = useState(pageNumGlobal)
     const [categorys,setCategorys]=useState([])
+    const [showModal, setModalshow] = useState('0')
+    const [recordSelect, setRecordSelect]=useState({})
+    const [isAdd,setIsAdd]=useState(null)
+    const [isAsend, setIsAsend] = useState(null)
+    const [operation, setOperation] = useState('')
+    const [amountTemp, SetAmountTemp] = useState(0)
 
     const navigate = useNavigate()
     
@@ -43,23 +53,34 @@ export default function StorageListHome() {
                 align: 'center',
                 width: '8%',
                 dataIndex: 'create_time',
-                
+                render: (date) => (
+                    <span>
+                        {convertDate(date)}&nbsp;
+                        {convertTime(date)}
+                    </span>
+                )
             },
             {
-                title: '库存',
+                title: (
+                    <div>
+                        库存
+                        <ArrowUpOutlined onClick={sortAsending} style={{marginLeft:'20px',color:'#1890ff'}}/>
+                        <ArrowDownOutlined onClick={sortDesending} style={{ marginLeft: '5px', color: '#1890ff' }} />
+                    </div>
+                ),
                 align: 'center',
                 dataIndex: 'storage',
-                width: '10%',
-                render: (category) => (
-                    <Row>
-                        <Col style={{ fontSize: '13px', marginRight: '10px',lineHeight:'25px',color:'gray' }}>余量: 999</Col>
+                width: '13%',
+                render: (amount, record) => (
+                    <Row style={{float:'right'}}>
+                        <Col style={{ fontSize: '13px', marginRight: '25px', lineHeight: '25px', color: `${amount<5?'red':'gray'}` }}>余量: {amount}</Col>
                         <Col>
                             <Button
                                 type='primary'
-                                onClick={() => { }}
+                                onClick={() => { showAddStorage(amount,record)}}
                                 style={{ backgroundColor: 'green', height: '25px', width: '50px', fontSize: '11px', marginRight: '5px'}}
                             >
-                                <p style={{ margin: '0 -7px', fontSize: '11px',fontWeight:'500' }}>
+                                <p style={{ margin: '0 -7px', fontSize: '11px',fontWeight:'500',color:'white' }}>
                                     + 库存
                                 </p>
                             </Button>
@@ -67,10 +88,11 @@ export default function StorageListHome() {
                         <Col>
                             <Button
                                 type='primary'
-                                onClick={() => { }}
-                                style={{ backgroundColor: '#1890ff', height: '25px', width: '50px', fontSize: '11px', marginRight: '5px' }}
+                                disabled={amount <= 0 ? true : false}
+                                onClick={() => { showMinStorage(amount,record)}}
+                                style={{ backgroundColor: `${amount <= 0 ?'lightGrey':'#1890ff'}`, height: '25px', width: '50px', fontSize: '11px', marginRight: '5px' }}
                             >
-                                <p style={{ margin: '0 -7px', fontSize: '11px', fontWeight: '500' }}>
+                                <p style={{ margin: '0 -7px', fontSize: '11px', fontWeight: '500', color: 'white' }}>
                                     - 库存
                                 </p>
                             </Button>
@@ -107,13 +129,79 @@ export default function StorageListHome() {
             }
         ])
     }
+    const sortAsending=async()=>{
+        setIsAsend(true)
+    }
+
+    const sortDesending=()=>{
+        setIsAsend(false)
+    }
+    const showAddStorage = (amount,record)=>{
+        console.log('showAddStorage:', record)
+        setOperation('add storage')
+        SetAmountTemp(amount)
+        setIsAdd(true)
+        setRecordSelect(record)
+        setModalshow('1')
+        
+    }
+    const showMinStorage = (amount,record)=>{
+        setOperation('minus storage')
+        SetAmountTemp(amount)
+        setIsAdd(false)
+        setRecordSelect(record)
+        setModalshow('1')
+    }
+    //onOK
     
+    const updateStorage=async ()=>{
+        //get input value from form
+        let { storage_update} = form.getFieldValue()
+        console.log('storage_update:', storage_update)
+        amountFinal = storage_update
+        //get the item id
+        const itemId = recordSelect._id
+        //check is add or min
+        if(!isAdd){
+            storage_update = -storage_update
+        }
+
+        let amount = recordSelect.storage + storage_update
+        amount = amount>0?amount:0
+        console.log('amount', storage_update)
+        //send update request
+        const res = await reqUpdateStorageItemStorage(itemId,amount)
+        const data=res.data
+        if(data.status===0){
+            getItems(pageNum)
+            addRecord()
+            message.success(`${isAdd?'add': 'reduce'} storage successfully!`)
+        }else{
+            message.error(`${isAdd ? 'add' : 'reduce'} storage failed!`)
+        }
+        //off the modal
+        setModalshow('0')
+        form.resetFields()
+    }
+    //oncancel
+    const handleCancel = () => {
+        setModalshow('0')
+        form.resetFields()
+    }
+    const showHistory=()=>{
+        console.log('to History page')
+        navigate('/layout/storage_list/history/', { replace: true })
+    }
     const showAddItem = () => {
         console.log('to addupdate page')
+        setOperation('addItem')
+        SetAmountTemp(-1)
         navigate('/layout/storage_list/add_update/', { replace: true })
     }
     const showUpdateDetail = (item)=>{
         console.log('to addupdate page')
+        setOperation('update')
+        SetAmountTemp(-1)
         navigate('/layout/storage_list/add_update/', { replace: true, state: { item }})
     }
     const showDetail = (item)=>{
@@ -132,28 +220,47 @@ export default function StorageListHome() {
         }
     }
     //发送异步请求
-    const getItems = async (pageNumber)=>{
-        pageNumGlobal = pageNumber
-        setLoading(true)
-        let result = {}
-        if (!forSearch){
-            console.log('normal')
-            result = await reqStorageItems(pageNumber, PAGE_SIZE)
-        }else{
-            console.log('search')
-            console.log({ pageNumber, PAGE_SIZE, searchName, searchType })
-            //
-            result = await reqSearchStorageItems({ pageNumber, pageSize:PAGE_SIZE, searchName, searchType})
+    const getItems = async (pageNumber, isAsend) => {
+        pageNumGlobal = pageNumber;
+        setLoading(true);
+        let result = {};
+        if (!forSearch) {
+            console.log('normal');
+            if(isAsend!=null){
+                result = await reqStorageItemsSort(pageNumber, PAGE_SIZE, isAsend)
+            }else{
+                result = await reqStorageItems(pageNumber, PAGE_SIZE);
+            }
+            
+        } else {
+            console.log('search');
+            console.log({ pageNumber, PAGE_SIZE, searchName, searchType });
+            result = await reqSearchStorageItems({
+                pageNumber,
+                pageSize: PAGE_SIZE,
+                searchName,
+                searchType,
+                isAsend,
+            });
         }
-        setLoading(false)
-        const data = result.data
+        setLoading(false);
+        const data = result.data;
         if (data.status === 0) {
-            const { list, total } = data.data
-            setItemList(list)
-            setTotal(total)
+            const { list, total } = data.data;
+            setItemList(list);
+            setTotal(total);
+        }
+    };
+
+    const addRecord = async() => {
+        const res = await reqOperationRecordAdd(operation, storageUtils.getUser().username, Date.now(), amountFinal, recordSelect.name)
+        const data = res.data
+        if(data.status===0){
+            console.log('add record successfully!')
+        }else{
+            console.log('add record failed!')
         }
     }
-
     //get onchange value under contral
     const handleSelectChange = (value) => {
         setSearchType(value)
@@ -170,9 +277,12 @@ export default function StorageListHome() {
     useEffect(() => {
         initColumns()
     }, [categorys])
+
     useEffect(()=>{
-        getItems(pageNum)
-    }, [pageNum, forSearch])
+        getItems(pageNum, isAsend)
+        console.log('itemlist:', itemList)
+    }, [pageNum, forSearch, isAsend])
+
     const title = (
         <span>
             <Select
@@ -203,11 +313,15 @@ export default function StorageListHome() {
         </span>
     )
     const extra = (
+        <span>
+            <LinkButton style={{ margin: '0 20px' }} onClick={() => showHistory()}>出入库记录</LinkButton>
+            <Button type='primary' onClick={showAddItem}>
+                <PlusOutlined />
+                添加
+            </Button>
+        </span>
 
-        <Button type='primary' onClick={showAddItem}>
-            <PlusOutlined />
-            添加
-        </Button>
+        
     )
     return (
         <Card
@@ -229,6 +343,31 @@ export default function StorageListHome() {
                     showQuickJumper: true,
                     onChange: page => setPageNum(page)//这里传入了page number
                      }} />
+            <Modal title="Please input the amount:"
+                open={showModal === '1'}
+                onOk={updateStorage}
+                onCancel={handleCancel}
+                width='350px'
+                >
+                <Form form={form}>
+                    <Form.Item
+                        name="storage_update"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input number',
+                            },
+                        ]}
+                    >
+                        <InputNumber
+                            style={{
+                                minWidth: 300,
+                            }}
+                        />
+                    </Form.Item>
+                </Form>
+            </Modal>
+
             <Outlet />
         </Card>
     )

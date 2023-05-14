@@ -37,11 +37,6 @@ const menuList = [
                 label: "分类",
                 key: "/storage_category",
                 icon: <NavLink to="storage_category"><CaretRightOutlined /></NavLink >
-            },
-            {
-                label: "库存警报",
-                key: "/storage_warning",
-                icon: <NavLink to="storage_warning"><CaretRightOutlined /></NavLink >
             }
         ]
     },
@@ -56,9 +51,9 @@ const menuList = [
                 icon: <NavLink to="employees_list"><CaretRightOutlined /></NavLink >
             },
             {
-                label: "排班",
-                key: "/employees_rooster",
-                icon: <NavLink to="employees_rooster"><CaretRightOutlined /></NavLink >
+                label: "打卡记录",
+                key: "/employees_time_records",
+                icon: <NavLink to="employees_time_records"><CaretRightOutlined /></NavLink >
             },
             {
                 label: "角色管理",

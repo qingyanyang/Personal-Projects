@@ -4,12 +4,13 @@ import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import storageUtils from '../../utils/storageUtils';
 import menuList from '../../config/menuConfig';
 import HeaderContent from '../../components/HeaderContent';
-import './index.css';
+import './Layout.css';
 
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function LayoutPage(props) {
+  console.log('menulist:', menuList)
   const navigate = useNavigate()
   const user = storageUtils.getUser()
   const { role } = user

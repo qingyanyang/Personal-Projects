@@ -1,14 +1,15 @@
-import { PlusOutlined, ExclamationCircleFilled } from '@ant-design/icons'
+import { PlusOutlined, ExclamationCircleFilled, SearchOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Card, Table, Button, message, Modal } from 'antd'
+import { Card, Table, Button, message, Modal, Select, Input } from 'antd'
 import { formateDate } from '../../utils/dateUtils'
 import { PAGE_SIZE } from '../../utils/constants'
 import LinkButton from '../../components/LinkButton'
-import { reqEmployees, reqAddEmployee, reqUpdateEmployee, reqDeleteEmployee } from '../../api'
+import { reqRoles,reqAddEmployee, reqUpdateEmployee, reqDeleteEmployee, reqEmployeesSearch } from '../../api'
 import AddUpdateForm from './AddUpdateForm'
 
-let roleSelect = {}
+
+let selectTrigger = false
 export default function Index() {
     const [columns, setColumns] = useState([])
     const [loading, setLoading] = useState(false)
@@ -17,6 +18,8 @@ export default function Index() {
     const [showModal, setModalshow] = useState('0')//0: all close 1:1 
     const [form, setForm] = useState({})
     const [employeeSelected, setEmployeeSelected] = useState({})
+    const [searchType, setSearchType] = useState('*')
+    const [searchName, setSearchName] = useState('*')
     //初始化
     const initColumns = () => {
         setColumns([
@@ -37,7 +40,19 @@ export default function Index() {
                 dataIndex: 'create_time',
             },
             {
-                title: '所属角色',
+                title: (
+                    <Select
+                        style={{ marginRight: '10px', width: '150px' }}
+                        defaultValue='*'
+                        onChange={handleSelectChange}
+                    >
+                        <Select.Option  value='*'>所属角色</Select.Option>
+                        {roles.map((role,index)=>(
+                            <Select.Option key={role._id} value={role._id}>{role.name}</Select.Option>
+                        ))}
+                    </Select>
+                ),
+                align:'center',
                 dataIndex: 'role_id',
                 render:(role_id)=>{
                     const role = roles.find(role => role._id === role_id);
@@ -46,12 +61,13 @@ export default function Index() {
             },
             {
                 title: '操作',
-                width: '10%',
+                align:'center',
+                width: '12%',
                 //category is the object of each row
                 render: (employeeSelected) => (
-                    <span style={{ marginLeft: '-20px' }}>
-                        <LinkButton style={{ margin: '0 20px' }} onClick={() => showUpdateRole(employeeSelected)}>修改</LinkButton>
-                        <LinkButton style={{ margin: '0 20px' }} onClick={() => handleDeleteEmployee(employeeSelected)}>删除</LinkButton>
+                    <span >
+                        <LinkButton style={{ margin: '0 5px' }} onClick={() => showUpdateRole(employeeSelected)}>修改</LinkButton>
+                        <LinkButton style={{ margin: '0 5px' }} onClick={() => handleDeleteEmployee(employeeSelected)}>删除</LinkButton>
                     </span>
                 )
             }
@@ -136,39 +152,86 @@ export default function Index() {
     const getForm = (form) => {
         setForm(form);
     };
-    
+    //get onchange value under contral
+    const handleSelectChange = (value) => {
+        setSearchType('role_id')
+        setSearchName(value)
+        selectTrigger=!selectTrigger
+    }
+
+    const handleInputChange = (e) => {
+        setSearchType('username')
+        setSearchName(e.target.value)
+        console.log('input:' + e.target.value)
+    }
     // //异步获取一级分类列表
     const getEmployee = async () => {
         //请求发生前,显示loading
         setLoading(true)
-        const result = await reqEmployees()
+        const result = await reqEmployeesSearch(searchType, searchName)
         //请求发生后
         setLoading(false)
         const data = result.data
         if (data.status === 0) {
             //get data arr
-            //console.log('receive:',data.data)
-            setEmployees(data.data.employees)
-            setRoles(data.data.roles)
+            console.log('receive:',data.data)
+            setEmployees(data.data)
         } else {
             message.error('获取分类列表失败')
         }
     }
-
+    const getRoles = async () => {
+        //请求发生前,显示loading
+        setLoading(true)
+        const result = await reqRoles()
+        //请求发生后
+        setLoading(false)
+        const data = result.data
+        if (data.status === 0) {
+            //get data arr
+            console.log('receive:',data.data)
+            setRoles(data.data)
+        } else {
+            message.error('获取分类列表失败')
+        }
+    } 
+    //only once
+    useEffect(()=>{
+        getRoles()
+    },[])
     // 只渲染一次
     useEffect(() => {
         initColumns()
         console.log('hehe')
+        console.log('roles:',roles)
     }, [roles])
-
 
     //执行异步请求
     useEffect(() => {
+        console.log('SelectTrigger', selectTrigger)
+        console.log('select:' + searchName)
         getEmployee()
-        console.log('haha')
-    }, [])
-
+    }, [selectTrigger])
+    
     const title = (
+        <span>
+            
+            <Input placeholder="search employee name"
+                style={{ marginRight: '10px', width: '200px' }}
+                onChange={handleInputChange}
+            />
+            <Button type="primary"
+                style={{ width: '80px' }}
+                onClick={() => {
+                    selectTrigger = !selectTrigger
+                }}
+            >
+                <SearchOutlined />
+                搜索
+            </Button>
+        </span>
+    )
+    const extra = (
         <span>
             <Button
                 type='primary'
@@ -182,6 +245,7 @@ export default function Index() {
     return (
         <Card
             title={title}
+            extra={extra}
             style={{
                 width: '100%'
             }}

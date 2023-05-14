@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Form, Tree } from 'antd';
 import menuList from '../../config/menuConfig'
@@ -7,10 +7,16 @@ SetAuthForm.protoTypes = {
   getFormValue: PropTypes.func.isRequired
 }
 
-export default function SetAuthForm(props) {
-  const { role } = props
-  
-  console.log('get from father', role)
+export default function SetAuthForm({ getCheck, role, resetFormKey }) {
+  console.log('menuList', menuList)
+  const [form] = Form.useForm()
+
+  const [checkedKeys, setCheckedKeys] = useState(role.menus || []);
+
+  useEffect(() => {
+    form.resetFields(); // <-- reset form fields on key change
+    setCheckedKeys(role.menus || []); // <-- reset checked keys on key change
+  }, [resetFormKey]);
 
   //get tree list
   const convertToTreeData = (menuList) => {
@@ -39,11 +45,13 @@ export default function SetAuthForm(props) {
   const treeData = [root];
 
   const onCheck = (checkedKeys) => {
-    props.getFormValue(checkedKeys)
+    getCheck(checkedKeys)
+    setCheckedKeys(checkedKeys)
     console.log('onCheck', checkedKeys);
   };
+
   return (
-    <Form>
+    <Form form={form}>
       <Form.Item
         name="input"
         label='角色名称'
@@ -66,7 +74,7 @@ export default function SetAuthForm(props) {
         <Tree
           checkable
           defaultExpandAll={true}
-          defaultCheckedKeys={role.menus}
+          checkedKeys={checkedKeys}
           onCheck={onCheck}
           treeData={treeData}
         />

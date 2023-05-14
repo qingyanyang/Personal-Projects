@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { reqLogin } from '../../api'
 import storageUtils from '../../utils/storageUtils'
 import memoryUtils from '../../utils/memoryUtils'
-import './index.css'
+import './Login.css'
 
 export default function Login() {
  

@@ -5,7 +5,7 @@ import {
     Select
 } from 'antd';
 //import { reqAddOrUpdateItem } from '../../api'
-import './index.css'
+import './EmployeesList.css'
 
 export default function AddUpdateForm({ getForm, roles, employeeSelected }) {
     const [form] = Form.useForm();
@@ -13,10 +13,6 @@ export default function AddUpdateForm({ getForm, roles, employeeSelected }) {
 
     const employee = employeeSelected || {}
     const { username, phone, email, role_id } = employee
-
-    useEffect(() => {
-        getForm(formRef.current);
-    }, [getForm]);
 
     const formItemLayout = {
         labelCol: {
@@ -48,6 +44,11 @@ export default function AddUpdateForm({ getForm, roles, employeeSelected }) {
             </Select>
         </Form.Item>
     );
+
+    useEffect(() => {
+        getForm(formRef.current);
+    }, [getForm]);
+    
     return (
             <Form
                 form={form}

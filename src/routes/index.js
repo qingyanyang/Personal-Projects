@@ -9,19 +9,19 @@ import MenuListHome from '../pages/MenuList/MenuListHome'
 import MenuListDetail from "../pages/MenuList/MenuListDetail"
 import MenuListAddUpdate from "../pages/MenuList/MenuListAddUpdate"
 import MenuCategory from "../pages/MenuCategory"
-import MenuWarning from "../pages/MenuWarning"
 import Storage from "../pages/Storage"
 import StorageCategory from "../pages/StorageCategory"
 import StorageList from "../pages/StorageList"
 import StorageListHome from '../pages/StorageList/StorageListHome'
 import StorageListDetail from '../pages/StorageList/StorageListDetail'
 import StorageListAddUpdate from '../pages/StorageList/StorageListAddUpdate'
-import StorageWarning from "../pages/StorageWarning"
+import StorageListHistory from '../pages/StorageList/StorageListHistory'
 import Employees from "../pages/Employees"
 import EmployeesList from "../pages/EmployeesList"
-import EmployeesRooster from "../pages/EmployeesRooster"
+import EmployeesTimeRecords from "../pages/EmployeesTimeRecords"
 import EmployeesRole from "../pages/EmployeesRole"
 import Finance from "../pages/Finance"
+import ChartCompare from '../pages/Finance/ChartCompare'
 import { Navigate } from "react-router-dom"
 
 export default[
@@ -90,10 +90,6 @@ export default[
                 element: <MenuCategory />
             },
             {
-                path: 'menu_warning',
-                element: <MenuWarning />
-            },
-            {
                 path: 'storage_list',
                 element: <StorageList />,
                 children: [
@@ -114,6 +110,10 @@ export default[
                         element: <StorageListAddUpdate />
                     },
                     {
+                        path: 'history',
+                        element: <StorageListHistory />
+                    },
+                    {
                         path: "*",
                         element: <Navigate to="/layout/storage_list" replace />,
                     }
@@ -124,16 +124,12 @@ export default[
                 element: <StorageCategory />
             },
             {
-                path: 'storage_warning',
-                element: <StorageWarning />
-            },
-            {
                 path: 'employees_list',
                 element: <EmployeesList />
             },
             {
-                path: 'employees_rooster',
-                element: <EmployeesRooster />
+                path: 'employees_time_records',
+                element: <EmployeesTimeRecords />
             }, 
             {
                 path: 'employees_role',
@@ -141,7 +137,21 @@ export default[
             },
             {
                 path: 'finance',
-                element: <Finance />
+                element: <Finance />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/layout/finance/compare" replace />,
+                    },
+                    {
+                        path: 'compare',
+                        element: <ChartCompare />
+                    },
+                    {
+                        path: "*",
+                        element: <Navigate to="/layout/finance" replace />,
+                    }
+                ]
             },
             {
                 path: "*",

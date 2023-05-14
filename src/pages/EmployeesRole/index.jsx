@@ -16,7 +16,9 @@ export default function Index() {
   const [roles, setRoles] = useState([])
   const [role,setRole]=useState({})
   const [showModal, setModalshow] = useState('0')//0: all close 1:1 open 2:2open
-  const [formValue, setFormValue] = useState('')
+  const [form, setForm] = useState('')
+  const [checkedKeys, setCheckedKeys] = useState([])
+  const [resetKey, setResetKey] = useState(0)
   //初始化
   const initColumns = () => {
     setColumns([
@@ -27,6 +29,10 @@ export default function Index() {
       {
         title: '创建时间',
         dataIndex: 'create_time',
+      },
+      {
+        title: '时薪',
+        dataIndex: 'rate',
       },
       {
         title: '授权时间',
@@ -84,12 +90,12 @@ export default function Index() {
     console.log('updateName')
     //发送请求修改名字
     setModalshow('0')
-    const res = await reqUpdateRoleName(role._id, formValue)
+    const res = await reqUpdateRoleName(role._id, form.getFieldsValue().rate, form.getFieldsValue().name)
     const data = res.data
     if(data.status===0){
       message.success('update role name successfully!')
-      
       getRoles()
+      form.resetFields()
     }else{
       message.error('update role name failed!')
     }
@@ -116,14 +122,15 @@ export default function Index() {
     })
   }
   const addRole = async()=>{
-    console.log('addrole:', formValue)
+    console.log('addrole:', form.getFieldsValue())
     setModalshow('0')
-    const res = await reqAddRole(formValue, formateDate(Date.now()))
+    const res = await reqAddRole(form.getFieldsValue().name, form.getFieldsValue().rate, formateDate(Date.now()))
     const data = res.data
     console.log(data)
     if(data.status===0){
       setRoles((prevRoles) => [...prevRoles, data.data])
       getRoles()
+      form.resetFields()
       message.success('add role successfully!')
     }else{
       message.error('add role failed!')
@@ -133,26 +140,37 @@ export default function Index() {
   
   const updateRoleAuth = async() => {
     //发送请求
-    console.log('updateRole')
+    console.log('updateRole',checkedKeys)
     setModalshow('0')
-    const res = await reqUpdateRoleAuth(role._id, formValue, formateDate(Date.now())) 
+    const res = await reqUpdateRoleAuth(role._id, checkedKeys, formateDate(Date.now())) 
     const data =res.data
     if(data.status===0){
       message.success('update auth successfully!')
       getRoles()
+      setResetKey(prevKey => prevKey + 1)
     }else{
       message.success('update auth failed!')
     }
-
   }
 
+  const handleCancelAuth=()=>{
+    setModalshow('0')
+    setResetKey(prevKey => prevKey + 1)
+  }
   const handleCancel=()=>{
     setModalshow('0')
+    form.resetFields()
   }
-  const getFormValue=(data)=>{
-    console.log('data from child:',data)
-    setFormValue(data)
+
+  const getCheck = (checkedKeys)=>{
+    console.log('value', checkedKeys)
+    setCheckedKeys(checkedKeys)
   }
+
+  const getForm = (form) => {
+    console.log('form:', form.getFieldsValue())
+    setForm(form);
+  };
   // //异步获取一级分类列表
   const getRoles = async () => {
     //请求发生前,显示loading
@@ -221,16 +239,17 @@ export default function Index() {
         onOk={addRole}
         onCancel={handleCancel}>
         <AddRoleForm
-          getFormValue={(data) => { getFormValue(data)}}
+          getForm={getForm}
            />
       </Modal>
       <Modal title="修改角色权限"
         open={showModal === '2'}
         onOk={updateRoleAuth}
-        onCancel={handleCancel}>
+        onCancel={handleCancelAuth}>
         <SetAuthForm
           role={role}
-          getFormValue={(data) => { getFormValue(data)} }
+          getCheck={getCheck}
+          resetFormKey={resetKey} 
            />
       </Modal>
       <Modal title="修改角色名称"
@@ -239,7 +258,7 @@ export default function Index() {
         onCancel={handleCancel}>
         <AddRoleForm
           role={role}
-          getFormValue={(data) => { getFormValue(data) }}
+          getForm={getForm}
         />
       </Modal>
     </Card>

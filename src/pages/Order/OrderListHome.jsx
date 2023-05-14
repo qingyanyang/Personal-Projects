@@ -5,7 +5,8 @@ import { Card, Table, Button, Modal, message, Input, Tooltip } from 'antd'
 import LinkButton from '../../components/LinkButton'
 import { reqOrders, reqSearchOrders, reqDeleteOrder } from '../../api'
 import { PAGE_SIZE } from '../../utils/constants'
-import './index.css'
+import { convertDate, convertTime } from '../../utils/dateUtils'
+import './Order.css'
 
 let pageNumGlobal = 1
 
@@ -14,9 +15,10 @@ export default function OrderList() {
     const [itemList, setItemList] = useState([])
     const [total, setTotal] = useState([])
     const [loading, setLoading] = useState(false)
-    const [searchOrderNum, setSearchOrderNum] = useState('')
     const [forSearch, setForSearch] = useState(false)
     const [pageNum, setPageNum] = useState(pageNumGlobal)
+    const [searchType, setSearchType] = useState('')
+    const [searchName, setSearchName] = useState('')
 
     console.log(pageNum)
     const navigate = useNavigate()
@@ -32,6 +34,12 @@ export default function OrderList() {
                 title: '下单时间',
                 width: '15%',
                 dataIndex: 'create_time',
+                render: (date) => (
+                    <span>
+                        {convertDate(date)}&nbsp;
+                        {convertTime(date)}
+                    </span>
+                )
             },
             {
                 title: '订单详情',
@@ -106,9 +114,9 @@ export default function OrderList() {
             result = await reqOrders(pageNumber, PAGE_SIZE)
         } else {
             console.log('search')
-            console.log({ pageNumber, PAGE_SIZE, searchOrderNum })
+            console.log({ pageNumber, PAGE_SIZE, searchType, searchName })
             //
-            result = await reqSearchOrders({ pageNumber, pageSize: PAGE_SIZE, orderId: searchOrderNum })
+            result = await reqSearchOrders({ pageNumber, pageSize: PAGE_SIZE, searchType,searchName })
         }
         setLoading(false)
         const data = result.data
@@ -122,9 +130,10 @@ export default function OrderList() {
 
     //get onchange value under contral
     const handleInputChange = (e) => {
-        setSearchOrderNum(e.target.value)
+        setSearchName(e.target.value)
         console.log('input:' + e.target.value)
     }
+
     //只渲染一次
     useEffect(() => {
         initColumns()
@@ -143,8 +152,10 @@ export default function OrderList() {
                 onClick={() => {
                     if (forSearch) {
                         getItems(1)
+                        setSearchType('_id')
                     } else {
                         setForSearch(true)
+                        setSearchType('_id')
                     }
                 }}
             >
