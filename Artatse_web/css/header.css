@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0 ;
+}
+.w {
+    width: 2600px;
+    margin: auto;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+li {
+    list-style: none;
+}
+body {
+    position: relative;
+}
+.clearfix:before,.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom:1;
+}
+.headerB {
+    position: fixed;
+    top:0;
+    width: 3030px;
+    padding-top: 40px;
+    height: 150px;
+    background-color: #ffffff;
+    z-index: 2;
+}
+.header {
+    position: relative;
+    height: 120px;
+    z-index: 2;
+}
+.header li {
+    color: black;
+    font-size: 25px;
+    font-family:"Arial", Helvetica, sans-serif;
+    letter-spacing: 6px;
+    text-decoration: none;
+}
+.nav {
+    float: left;
+    line-height: 120px;
+}
+.nav li {
+    float: left;
+    padding-right: 40px;
+}
+.nav li:hover{
+    color: #885fff;
+}
+.nav a:hover, .search_user a:hover {
+    color: #885fff;
+}
+.shop-line {
+    position: absolute;
+    top:80px;
+    height:7px;
+    background-color: #885fff;
+}
+.shop-line{
+    display: none;
+    left: 0;
+    width:125px;
+}
+.search_user li {
+    float: right;
+}
+.search_user .search {
+    margin-right: 40px;
+}
+.logo{
+    float: left;
+    position: absolute;
+    top:10px;
+    left:650px;
+    /*left:850px;*/
+    /*top:50px;*/
+}
+.search_user {
+    float: right;
+    line-height: 120px;
+}
+.search_user a img{
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+.shop-list {
+    position: absolute;
+    top:190px;
+    left:212px;
+    width:2000px;
+    height:0;
+    background-color: #ffffff;
+    overflow: hidden;
+    opacity:0.96;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    transition: all .2s;
+    z-index:10;
+}
+.shop-list a{
+    color:black;
+    text-decoration: none;
+}
+.shop-list a:hover{
+    color: #5f6cff;
+}
+.shop-list p {
+    margin-bottom:20px;
+    font-weight: 600;
+}
+
+.shop-list li {
+    margin-bottom:10px;
+}
+.col01,.col02,.col03,.col04 {
+    float: left;
+    margin-left: 80px;
+    margin-top: 40px;
+    font-size: 28px;
+    font-family: "Avenir Next", Sans-serif, serif;
+    letter-spacing: 3px;
+
+
+}

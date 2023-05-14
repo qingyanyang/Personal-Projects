@@ -1,0 +1,286 @@
+@import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+body {
+    margin:0;
+    font-family: Arial;
+    position: relative;
+}
+.logo {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 36px;
+    padding-left: 20px;
+}
+.navi {
+    width: 3500px;
+    height: 130px;
+    color: black;
+    border-bottom: .5px solid #a8a8a8;
+    background-color: white;
+    position: fixed;
+    top: 0;
+}
+.guide {
+    display: inline-block;
+    height: 130px;
+    font: 32px "Arial";
+    line-height: 130px;
+    padding: 0 40px;
+    margin-right: 660px;
+}
+.guide a {
+    margin: 0 30px;
+    color: black;
+    text-decoration: none;
+    letter-spacing: 4px;
+}
+.guide .study-Guide {
+    margin: 0 30px;
+    color: black;
+    text-decoration: none;
+    letter-spacing: 4px;
+}
+.guide .study-Guide:hover {
+    color: #022EFF;
+}
+.guide a:hover {
+    color: #022EFF;
+}
+.search {
+    vertical-align: middle;
+    margin-right: 80px;
+}
+.search .button {
+    width: 53px;
+    height: 53px;
+    border-radius: 25px;
+    border: 1px solid #c2c1c1;
+    background-image: url("../images/scope.png");
+    background-repeat: no-repeat;
+    background-position: 6px center;
+    margin-right: 30px;
+    background-color: white;
+}
+.search .text {
+    line-height: 45px;
+    font-size: 25px;
+    width: 420px;
+    height: 45px;
+    border-radius: 25px;
+    border: 1px solid #C2C1C1FF;
+    color: #a8a8a8;
+}
+.notification {
+    display: inline-block;
+    line-height: 45px;
+    vertical-align: middle;
+    margin-right: 50px;
+}
+.notification a {
+    margin: 0 20px;
+}
+#studyGuide {
+
+    left:100px;
+    position: absolute;
+    width:2100px;
+    height:0px;
+    overflow: hidden;
+    background-color: #ffffff;
+    /*opacity:0.8;*/
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    transition: all .2s;
+    z-index:10;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+#studyGuide .part {
+    display: inline-block;
+    margin: 10px 50px;
+    vertical-align: top;
+}
+#studyGuide p {
+    margin-left:38px;
+    color: #020000;
+}
+#studyGuide ul li {
+    list-style: none;
+    margin: 20px 0;
+    font-weight: 200;
+    font-size: 25px;
+    color: #3b3f41;
+}
+#studyGuide ul .title-s {
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+#studyGuide .title-s:hover {
+    color: #022EFF;
+}
+.body {
+    width: auto;
+    height: 1850px;
+    /*background-color: #a8a8a8;*/
+    margin-top: 145px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.body div {
+    border-radius: 10px;
+}
+.banner {
+    float: left;
+    width: 2100px;
+    height: 651px;
+    vertical-align: top;
+    background-color: #a8a8a8;
+    margin-right: 25px;
+}
+.live_mock {
+    margin-top: 40px;
+    float: left;
+    height: 520px;
+    width: 2100px;
+}
+.live_mock .live,.mock {
+    float: left;
+
+    height: 520px;
+    width: 1035px;
+}
+.content {
+    float: left;
+    height: 450px;
+    width: 1035px;
+}
+.live {
+    margin-right: 15px;
+}
+.mock {
+    margin-left: 15px;
+}
+.live .liveLecture {
+    padding-left: 20px;
+    font: 32px "Arial";
+    line-height:70px;
+    letter-spacing: 4px;
+}
+.live .script {
+    background-color: #f1f0f0;
+    background-image: url("../images/Interview Tips_.png");
+    background-size:70%;
+    background-position: 70px 40px;
+    background-repeat: no-repeat;
+    float: left;
+    height: 450px;
+    width: 518px;
+}
+.script p {
+    font-family: Arial;
+    margin: 0;
+    letter-spacing: 1px;
+}
+.script .by {
+    font-size: 30px;
+    display: inline;
+    padding-left: 70px;
+}
+.script .name {
+    font-size: 50px;
+    display: inline;
+}
+.script .time {
+    padding-left: 70px;
+    letter-spacing: 1px;
+    color: #022EFF;
+    font-size: 45px
+}
+.script .date {
+    padding-left: 70px;
+    letter-spacing: 1px;
+    color: #022EFF;
+    font-size: 25px
+}
+.script input {
+    letter-spacing: 4px;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-left: 70px;
+    width: 200px;
+    height: 53px;
+    color: white;
+    border-radius: 25px;
+    background-color: black;
+    border:0;
+    box-shadow: 2px 2px 4px #000000;
+}
+.mock a {
+    padding-left: 20px;
+    display: inline-block;
+    height: 70px;
+    line-height:90px;
+}
+.liveLecture {
+    margin: 0;
+    height: 70px;
+}
+.mock .content .mock1,.mock2 {
+    float: left;
+    background-color: #f1f0f0;
+    height: 450px;
+    width: 502px;
+}
+.mock1 {
+    margin-right: 15px;
+}
+.scriptMock1 {
+    margin-left: 40px;
+}
+.scriptMock1 p{
+    margin: 0;
+    font-family: Arial;
+
+}
+.scriptMock1 .byPro {
+    padding-top: 15px;
+    font-size: 22px;
+    color: #807e7e;
+}
+.scriptMock1 .char {
+    font-size: 15px;
+    display: inline-block;
+    padding-top: 20px;
+}
+.scriptMock1 .price {
+    display: inline-block;
+    padding-top: 16px;
+    font-size: 38px;
+    color: #022EFF;
+    letter-spacing: -2px;
+}
+.scriptMock1 .rate {
+    display: inline-block;
+    margin-left: 20px;
+}
+.five-star:before {
+    content: '\f005';
+    font-family: FontAwesome;
+}
+.scriptMock1 input {
+    background-image: url("../images/triangleW.png");
+    background-size: 7%;
+    background-repeat: no-repeat;
+    background-position: 19px center;
+    display: block;
+    width: 100px;
+    height: 35px;
+    color: white;
+    border-radius: 25px;
+    background-color: black;
+    border:0;
+    padding-left: 20px;
+    /*box-shadow: 2px 2px 4px #000000;*/
+}
+.mock2 {
+    margin-left: 15px;
+}

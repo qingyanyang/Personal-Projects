@@ -1,0 +1,51 @@
+.shareVideo {
+    margin-top: 40px;
+    float: left;
+    height: 560px;
+    width: 2100px;
+}
+.shareVideo .tittleVideo {
+    height: 70px;
+}
+.tittleVideo p {
+    padding-left: 20px;
+    font: 32px "Arial";
+    line-height:70px;
+    letter-spacing: 4px;
+}
+.videos .video1,.video2,.video3,.video4 {
+    width: 502px;
+    height: 490px;
+    background-color: #f1f0f0;
+    float: left;
+}
+.videos .video1,.video2,.video3 {
+    margin-right: 30.6px;
+}
+.scriptVideo {
+    padding-left: 20px;
+    padding-right:20px;
+    font-family: Arial;
+    letter-spacing: .5px;
+    height: 170px;
+}
+.scriptVideo .tittle1 {
+    color: #3b3f41;
+    font-size: 22px;
+}
+.scriptVideo a {
+    height: 35px;
+    color: #7983fc;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.scriptVideo .view,.dateV {
+    color: #989a9a;
+}
+.scriptVideo .dateV {
+    display: inline;
+    margin-top: 26px;
+    float: right;
+}

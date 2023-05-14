@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ravi's Study Program</title>
+    <link rel="stylesheet" href="css/navi.css">
+    <link rel="stylesheet" href="css/shareVideos.css">
+    <link rel="stylesheet" href="css/info.css">
+    <link rel="icon" href="images/logo.png">
+</head>
+<body>
+<script src="js/drop-down-menu.js">
+</script>
+<div class="navi">
+    <a href="homepage.html" target="_self" class="logo"><img src="images/logo RSP02.png" alt="logo" ></a>
+    <span class="guide">
+        <span class="study-Guide" id="study-Guide"> Study Guide <img src="images/triangle.png" alt="option" ></span>
+        <a href="forum.html" target="_blank" class="forum">Forum</a>
+        <a href="application.html" target="_blank" class="application">Application</a>
+    </span>
+    <span class="search">
+        <input type="button" value=" " class="button">
+        <input type="text" value="   book mocks" class="text">
+    </span>
+    <span class="notification">
+        <a href="#" class="message"><img src="images/message.png" alt="message" width="40px" height="=40px" class="no"></a>
+        <a href="#" class="ding"><img src="images/notification.png" alt="ding" width="40px" height="=40px" class="no"></a>
+        <a href="#" class="user"><img src="images/porait.png" alt="user" width="45px" height="=45px" class="no"></a>
+
+    </span>
+</div>
+<div class="studyGuide" id="studyGuide">
+    <div class="part">
+        <p>study instruction</p>
+        <ul>
+            <li class="title-s">Beginner</li>
+            <li>Data structures & Algorithms</li>
+            <li>basic of interview</li>
+        </ul>
+        <ul>
+            <li class="title-s">Novice</li>
+            <li>leetcode training</li>
+            <li>mock interviews</li>
+            <li>mock interview instruction</li>
+        </ul>
+
+    </div>
+    <div class="part">
+        <ul>
+            <li class="title-s">Medium</li>
+            <li>tense leetcode practising</li>
+            <li>mock interviews</li>
+            <li>mock interview instruction</li>
+        </ul>
+        <p>employ instruction</p>
+        <ul>
+            <li class="title-s">Lectures</li>
+            <li>livestreams</li>
+            <li>recording</li>
+        </ul>
+        <ul>
+            <li class="title-s">Resume</li>
+            <li>industrial samples</li>
+        </ul>
+
+    </div>
+    <div class="part">
+        <ul>
+            <li class="title-s">Projects</li>
+            <li>project tutorials</li>
+        </ul>
+        <ul>
+            <li class="title-s">Applications</li>
+            <li>internship</li>
+            <li>graduate</li>
+        </ul>
+        <ul>
+            <li class="title-s">Experience</li>
+            <li>advice of FAANG workers</li>
+        </ul>
+
+    </div>
+    <div class="part">
+        <ul>
+            <li class="title-s">Interview questions</li>
+            <li>new released</li>
+            <li>behavioural sample questions</li>
+            <li>tech sample questions</li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+    <div class="banner">
+        <a href="application.html" target="_blank" class="banner01"><img src="images/banner.png" alt="banner" width="2100px" height="=651px"></a>
+    </div>
+    <div class="info">
+        <div class="task">
+            <div class="portaitInfo">
+                <div class="circle">
+                    <div class="avator"></div>
+                </div>
+                <p>Qingyan</p>
+                <input type="button" value="Study Now">
+            </div>
+            <div class="taskList">
+                <div class="title">beginner</div>
+                <ul style="float:left">
+                    <li class="left">ATCT</li>
+                    <li class="left">ADM</li>
+                    <li class="left">Resume</li>
+                    <li class="left">Lectures</li>
+                </ul>
+                <ul style="float:right">
+                    <li class="right">2/10</li>
+                    <li class="right">36/86</li>
+                    <li class="right">30%</li>
+                    <li class="right">4/5</li>
+                </ul>
+                <input type="button" value="promote">
+            </div>
+        </div>
+        <div class="hours">
+            <div id="dateOfToday">
+                <script type="text/javascript">
+                    let date = new Date();
+                    let day = date.getDay();
+                    let week;
+                    if(day==0)week="Sunday";
+                    if(day==1)week="Monday";
+                    if(day==2)week="Tuesday";
+                    if(day==3)week="Wednesday";
+                    if(day==4)week="Thursday";
+                    if(day==5)week="Friday";
+                    if(day==6)week="Saturday";
+                    document.write(date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear() +"   "+week);
+                </script>
+            </div>
+            <div class="bar">
+                <div class="process"></div>
+            </div>
+            <div style="width: 600px; height:60px;font-size: 22px">
+                <p class="p2">2</p>&nbsp;<p class="left">days left</p>
+            </div>
+            <p class="p24">24</p><p class="p30">/30</p>&nbsp;<p class="hour">Hours</p>
+            <input type="button" value="change plan">
+        </div>
+        <div class="mates">
+            <p class="myMate">My Mates</p>
+            <div class="div-relative">
+                <div class="div-a">
+                    <a href="#"><img src="images/plus.png" alt="add" width="100px" height="100px"></a>
+                </div>
+                <div class="div-b"></div>
+                <div class="div-c"></div>
+            </div>
+            <div class="actions">
+                <div>
+                    <p class="mate1">FanXiang</p>&nbsp;<p> finished Chapter 3 of CICT</p><p class="time1">2 mins ago</p>
+                </div>
+                <div>
+                    <p class="mate2">Francies</p>&nbsp;<p> updated her resume </p><p class="time1">just now</p>
+                </div>
+                <div class="promote">
+                    <p>Congrats!</p>&nbsp;<p class="mate3"> Chelsea</p>&nbsp;<p> promoted to novice!</p><p class="time1">2 hours ago</p>
+                </div>
+                <div>
+                    <p class="mate1">FanXiang</p>&nbsp;<p> finished Chapter 7 of CICT</p><p class="time1">3 hours ago</p>
+                </div>
+                <div>
+                    <p class="mate2">Francies</p>&nbsp;<p> updated her resume</p><p class="time1">just now</p>
+                </div>
+            </div>
+            <div class="cover"></div>
+            <a href="#" class="more"><img src="images/triangleB.png" alt="press" width="10px" height="15px">&nbsp;more</a>
+        </div>
+    </div>
+    <div class="live_mock">
+        <div class="live">
+            <p class="liveLecture">Live Lecture</p>
+            <div class="content">
+                <div class="script">
+                    <div style="height: 140px"></div>
+                    <p class="by">by</p>&nbsp&nbsp <p class="name">Clarie Joy</p>
+                    <div style="width:100px;height: 6px;background-color: black;margin: 25px 70px;border-radius:0;"></div>
+                    <p class="time">10:00 am</p>
+                    <p class="date">10/02/2023</p>
+                    <input type="button" value="Register">
+                </div>
+                <img src="images/liveLecture.png" alt="liveLec" width="517px" height="450px" style="border-radius: 0 10px 10px 0;">
+            </div>
+        </div>
+        <div class="mock">
+            <a href="#" class="bookMock"><img src="images/bookInterview.png" alt="book_interview" width="360px" height="25px"></a>
+            <div class="content">
+                <div class="mock1">
+                    <img src="images/mock1.png" alt="mock1" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                    <div class="scriptMock1">
+                        <p class="byPro">* by big tech professionals</p>
+                        <p class="char">$</p>
+                        <p class="price">16.8</p>
+                        <div class="rate">
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #c9c9c9"></span>
+                            <span class="five-star" style="color: #c9c9c9"></span>
+                            <a href="" style="text-decoration:none; color: black">45 reviews</a>
+                        </div>
+                        <input type="button" value=" more" class="buttonMore">
+                    </div>
+                </div>
+                <div class="mock2">
+                    <img src="images/mock2.png" alt="mock2" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                    <div class="scriptMock1">
+                        <p class="byPro">* by big tech professionals</p>
+                        <p class="char">$</p>
+                        <p class="price">26.8</p>
+                        <div class="rate">
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #020000"></span>
+                            <span class="five-star" style="color: #c9c9c9"></span>
+                            <a href="" style="text-decoration:none; color: black">102 reviews</a>
+                        </div>
+                        <input type="button" value=" more" class="buttonMore">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shareVideo">
+        <div class="tittleVideo">
+            <p style="margin: 0;display: inline">Hot Share</p>
+            <a href="#" style="text-decoration: none; color: #bbbdbe; font-size: 30px;font-family: Arial; letter-spacing: 1px">&nbsp;&nbsp;<img
+                    src="images/triangleB.png" alt="press" height="20px" width="15px">&nbsp;more</a>
+        </div>
+        <div class="videos">
+            <div class="video1">
+                <img src="images/v1.png" alt="video01" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                <div class="scriptVideo">
+                    <p class="tittle1">The BEST Software Engineer Interview
+                        Prep Strategy (FAANG Engineer Advice)</p>
+                    <p class="view">52k viewed</p>
+                    <a href="#" class="user"><img src="images/poraitV.png" alt="poraitV1" style="vertical-align: middle;">&nbsp;&nbsp;your average tech bro</a>
+                    <p class="dateV">12/12/2022</p>
+                </div>
+            </div>
+            <div class="video2">
+                <img src="images/v2.png" alt="video02" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                <div class="scriptVideo">
+                    <p class="tittle1">How to use leetcode effectively(with 3-month plan)</p>
+                    <p class="view">63k viewed</p>
+                    <a href="#" class="user"><img src="images/profit4.png" alt="porait2" style="vertical-align: middle;">&nbsp;&nbsp;PIPATE KING</a>
+                    <p class="dateV">31/01/2023</p>
+                </div>
+            </div>
+            <div class="video3">
+                <img src="images/v3.png" alt="video03" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                <div class="scriptVideo">
+                    <p class="tittle1">Medium Google Coding Interview with Ben Award</p>
+                    <p class="view">31k viewed</p>
+                    <a href="#" class="user"><img src="images/profit2.png" alt="poraitV1" style="vertical-align: middle;">&nbsp;&nbsp;Clement Chole</a>
+                    <p class="dateV">10/01/2023</p>
+                </div>
+            </div>
+            <div class="video4">
+                <img src="images/v4.png" alt="video04" width="502px" height="282px" style="border-radius: 10px 10px 0 0;">
+                <div class="scriptVideo">
+                    <p class="tittle1">Java HashMap Tutorials and relative leetcode solutions </p>
+                    <p class="view">100k viewed</p>
+                    <a href="#" class="user"><img src="images/profit3.png" alt="poraitV1" style="vertical-align: middle;">&nbsp;&nbsp;BroCode</a>
+                    <p class="dateV">31/12/2022</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

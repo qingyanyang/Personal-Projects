@@ -1,0 +1,22 @@
+.ad {
+    margin-top: 180px;
+    height: 70px;
+    width: auto;
+    font-size: 30px;
+    font-family:"Arial", Helvetica, sans-serif;
+    font-weight:700;
+    line-height: 70px;
+    text-align: center;
+    letter-spacing: 6px;
+    background-color: #000000;
+}
+.ad a {
+    color: #885fff;
+    text-decoration: none;
+}
+.ad a:hover {
+    color: white;
+}
+.search-input {
+    height: 100px;
+}
